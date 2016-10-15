@@ -29,7 +29,7 @@
     <hr/>
     <div class="container">
         <div style="margin-top: 20px">
-            <h2>{{ $post->title }}</h2>
+            <h2><a href="https://www.hangshare.com/{{ $post->urlTitle }}/" target="_blank">{{ $post->title }}</a></h2>
             {!!  $post->body->body !!}
         </div>
     </div>
