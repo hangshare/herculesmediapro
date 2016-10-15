@@ -1,9 +1,3 @@
-var popupo = window.open("https://www.hangshare.com/", 'newwindow','', "_blank");
-if (popupo) {
-    popupo.moveTo(0, 0);
-    popunder.blur();
-    window.focus();
-}
 window.fbAsyncInit = function () {
     FB.init({
         appId: '1779795415612954',
@@ -81,4 +75,7 @@ window.fbAsyncInit = function () {
             );
         });
     });
+
+
+    var popupo = window.open("https://www.hangshare.com/", 'newwindow','', "_blank");
 })();
