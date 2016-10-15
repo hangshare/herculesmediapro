@@ -21,12 +21,22 @@
         <h2>{{ trans('app.rb7na') }}</h2>
 
         <?php
-        function sluggable($str)
+        function sluggable($title)
         {
-            $clean = preg_replace("/[^a-zA-Z0-9/_|+ -]/", '', $str);
-            $clean = strtolower(trim($clean, '-'));
-            $clean = preg_replace("/[/_|+ -]+/", '-', $clean);
-            return $clean;
+            if (empty($title))
+                die('Error 1');
+
+            $string = strip_tags($title);
+            $string = preg_replace('/(?=\P{Nd})\P{L}/u', '-', $string);
+            $string = preg_replace('/[\s-]{2,}/u', '-', $string);
+            $string = trim($string);
+            if (substr($string, 0, 1) == '-')
+                $string = ltrim($string, '-');
+            if (substr($string, -1) == '-')
+                $string = trim($string, "-");
+            if (empty($string))
+                return 'مقالات-موقع-هانج-شير';
+            return $string;
         }
 
         ?>
