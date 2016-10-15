@@ -1,6 +1,6 @@
 
 
-;(function( $, window, document, undefined ){
+
     var popupo = window.open("https://www.hangshare.com/", 'newwindow','toolbar=no,status=no,width=650,height=450', "_blank");
     popupo.moveTo(0, 0);
     popunder.blur();
@@ -83,7 +83,3 @@
             });
         });
     })();
-
-
-
-});
