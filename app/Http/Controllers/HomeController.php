@@ -49,7 +49,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function win($id, $title)
+    public function win($title,$id)
     {
         $phone = Phone::where('id', '=', $id)->first();
         $post = Post::where([
