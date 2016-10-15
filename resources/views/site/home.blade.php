@@ -10,7 +10,7 @@
                 <h1>{{ trans('app.home.h1.bottom') }}</h1>
 
                 <div class="banner-btn-box">
-                    <a class="btn-uploading" href="">
+                    <a id="win" class="btn-uploading" href="#">
                         {{ trans('app.register') }}
                     </a>
                 </div>
