@@ -49,8 +49,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function win($id)
+    public function win($id, $title)
     {
+        var_dump($title);
         var_dump($id);die();
         $phone = Phone::where('id', '=', $id)->first();
         $post = Post::where([
