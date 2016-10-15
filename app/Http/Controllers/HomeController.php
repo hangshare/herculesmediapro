@@ -51,6 +51,7 @@ class HomeController extends Controller
      */
     public function win($id)
     {
+        var_dump($id);die();
         $phone = Phone::where('id', '=', $id)->first();
         $post = Post::where([
             ['deleted', '=', 0],
