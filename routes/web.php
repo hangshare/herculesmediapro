@@ -12,5 +12,5 @@
 */
 Route::group(['middleware' => 'web'], function () {
     Route::get('/', 'HomeController@index');
-    Route::get('/win/{id}', ['uses'=>'HomeController@win']);
+    Route::get('/win/{title}/{id}', ['uses'=>'HomeController@win']);
 });
