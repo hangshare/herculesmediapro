@@ -49,17 +49,57 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function win($title,$id)
+    public function win($title, $id)
     {
         $phone = Phone::where('id', '=', $id)->first();
         $post = Post::where([
             ['deleted', '=', 0],
-            ['score','>',0]
+            ['score', '>', 0]
         ])->orderBy(DB::raw('RAND()'))->first();
         return view('site.win', [
             'phone' => $phone,
             'post' => $post
         ]);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function signup()
+    {
+//        $data = [];
+//
+//        $rules = array(
+//            'name' => 'required',
+//            'email' => 'required|email|unique:users',
+//            'username' => 'required|unique:users|alpha_dash',
+//            'password' => 'required|min:3|confirmed',
+//        );
+//        $validator = Validator::make($data, $rules);
+//        if ($validator->fails()) {
+//            return Response::json(array('success' => false, 'id' => ''), 200);
+//        }
+//
+//        $user = User::create($data);
+        $id = rand(80, 50000);
+        echo json_encode(['success' => true, 'id' => $id]);
+    }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function user($id)
+    {
+        $model = User::where('id', '=', $id)->first();
+        if ($model === null) {
+            return response()->view('errors.503', [], 404);
+        }
+        return view('user.profile', ['model' => $model]);
     }
 
     public function showRegister(Request $error)
