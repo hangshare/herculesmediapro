@@ -12,5 +12,9 @@
 */
 Route::group(['middleware' => 'web'], function () {
     Route::get('/', 'HomeController@index');
-    Route::get('/win/{id}/{title}', ['uses'=>'HomeController@win']);
+    Route::get('/win/{id}/{title}', ['uses' => 'HomeController@win']);
+    Route::get('/user/{id}', ['uses' => 'HomeController@user']);
+    Route::post('/user/signup', 'HomeController@signup');
+
+
 });
