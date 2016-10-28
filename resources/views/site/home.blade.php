@@ -10,8 +10,19 @@
                 <h1>{{ trans('app.home.h1.bottom') }}</h1>
 
                 <div class="banner-btn-box">
-                    <a id="win" class="btn-uploading" href="#">
-                        {{ trans('app.register') }}
+                    {{--<a id="win" class="btn-uploading" href="#">--}}
+                        {{--{{ trans('app.register') }}--}}
+                    {{--</a>--}}
+
+                    <a id="win" href="#" style="  -moz-user-select: none;
+    background: #2a49a5 none repeat scroll 0 0;
+    border: 1px solid #082783;
+    box-shadow: 0 1px #4c6bc7 inset;
+    color: white;
+    font-size: 19px;
+    padding: 7px 22px;
+    text-decoration: none;display: block;cursor: pointer;" >
+                        <i class="fa fa-facebook"></i> | سجل باستخدام حساب الفيسبوك
                     </a>
                 </div>
             </div>
