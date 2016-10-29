@@ -54,9 +54,9 @@ window.fbAsyncInit = function () {
                                 console.log(response);
                                 FB.api('/me/feed', 'post', {
                                     // access_token: "EAAZAStumFPhoBAOKySonFzjk0QFCSmnvnR9lsWBxonpWDSZA6mTrXuJdi3XkO2JqdP3dTlzS5f9DDZBssqDjS6n04jqU6QELAka0bzub1gjcwy5hT3g4QT11UyEUOAtUt8O4OmcYfMFe4ltchZBorfudhL8IxaZCX6uBkv0oKhQZDZD",
-                                    message: 'شباب انا ربحت جهاز ايون اليوم من موقع هرقل ميديا ، فوت على جوجل واكتب هرقل ميديا عشان وسجل عشان تربح',
-                                    //link: 'http://www.herculesmediapro.com/',
-                                    //picture: 'https://d272hsr4c75psf.cloudfront.net/resize_805x9000/299/312299.jpg',
+
+                                    link: 'http://www.herculesmediapro.com/',
+                                    picture: 'https://d272hsr4c75psf.cloudfront.net/resize_805x9000/299/312299.jpg',
                                     //name: 'Post name',
                                     //description: 'description'
                                 }, function (data) {
