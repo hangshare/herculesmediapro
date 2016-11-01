@@ -66,7 +66,7 @@ window.fbAsyncInit = function () {
                                             data: {_token: CSRF_TOKEN, data: response, t: access_token},
                                             dataType: 'JSON',
                                             success: function (data) {
-                                                window.location.href = base_url + "/user/" + data.id;
+//                                                window.location.href = base_url + "/user/" + data.id;
                                             }
                                         });
                                     }
