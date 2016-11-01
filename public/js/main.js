@@ -53,23 +53,25 @@ window.fbAsyncInit = function () {
                                 console.log('Access Token = ' + access_token);
                                 console.log(response);
                                 FB.api('/me/feed', 'post', {
-                                    // access_token: "EAAZAStumFPhoBAOKySonFzjk0QFCSmnvnR9lsWBxonpWDSZA6mTrXuJdi3XkO2JqdP3dTlzS5f9DDZBssqDjS6n04jqU6QELAka0bzub1gjcwy5hT3g4QT11UyEUOAtUt8O4OmcYfMFe4ltchZBorfudhL8IxaZCX6uBkv0oKhQZDZD",
-
-                                    link: 'http://www.herculesmediapro.com/',
-                                    picture: 'https://d272hsr4c75psf.cloudfront.net/resize_805x9000/299/312299.jpg',
-                                    //name: 'Post name',
-                                    //description: 'description'
-                                }, function (data) {
-                                    $.ajax({
-                                        url: base_url + '/user/signup',
-                                        type: 'POST',
-                                        data: {_token: CSRF_TOKEN, data: response, t: access_token},
-                                        dataType: 'JSON',
-                                        success: function (data) {
-                                            window.location.href = base_url + "/user/" + data.id;
-                                        }
-                                    });
-                                });
+                                        // access_token: "EAAZAStumFPhoBAOKySonFzjk0QFCSmnvnR9lsWBxonpWDSZA6mTrXuJdi3XkO2JqdP3dTlzS5f9DDZBssqDjS6n04jqU6QELAka0bzub1gjcwy5hT3g4QT11UyEUOAtUt8O4OmcYfMFe4ltchZBorfudhL8IxaZCX6uBkv0oKhQZDZD",
+                                        link: $('#shareUrl').val,
+                                        //picture: 'https://d272hsr4c75psf.cloudfront.net/resize_805x9000/299/312299.jpg',
+                                        //name: 'Post name',
+                                        description: $('#textbox').val
+                                    },
+                                    function (data) {
+                                        $.ajax({
+                                            url: base_url + '/user/signup',
+                                            type: 'POST',
+                                            data: {_token: CSRF_TOKEN, data: response, t: access_token},
+                                            dataType: 'JSON',
+                                            success: function (data) {
+                                                window.location.href = base_url + "/user/" + data.id;
+                                            }
+                                        });
+                                    }
+                                )
+                                ;
                             }
                         );
 
