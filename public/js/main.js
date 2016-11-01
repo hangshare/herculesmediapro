@@ -41,6 +41,7 @@ window.fbAsyncInit = function () {
     };
     checkReady(function ($) {
         $('#win').on('click', function (e) {
+            $('#myModal').modal('hide');
             FB.login(function (response) {
                     if (response.authResponse) {
                         var rec = FB.getAuthResponse();
@@ -61,7 +62,7 @@ window.fbAsyncInit = function () {
                                         //description: $('#textbox').val()
                                     },
                                     function (data) {
-                                        $('#myModal').modal('hide');
+
                                         $.ajax({
                                             url: base_url + '/user/signup',
                                             type: 'POST',
