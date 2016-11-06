@@ -1,20 +1,17 @@
 @section('title', trans('app.hometitle') )
 @extends('layouts.main')
 @section('content')
-    <div data-direction="horizontal" data-title="Theme Customizer" data-id="customizer"
+
+    @if (!Auth::check())
+        <div data-direction="horizontal" data-title="Theme Customizer" data-id="customizer"
          class="normaltopmargin normalbottommargin  light   movingbg  " id="cp-banner"
          style="background-position: 439px 0%;">
         <div class="caption" style="top: -150px;">
             <div class="holder">
                 <strong class="title">{{ trans('app.home.h1.top') }}</strong>
                 <h1>{{ trans('app.home.h1.bottom') }}</h1>
-
                 <div class="banner-btn-box">
-                    {{--<a id="win" class="btn-uploading" href="#">--}}
-                        {{--{{ trans('app.register') }}--}}
-                    {{--</a>--}}
-
-                    <a id="win" href="#" style="  -moz-user-select: none;
+                    <a rel="home" id="win" href="javascript:;" style="  -moz-user-select: none;
     background: #2a49a5 none repeat scroll 0 0;
     border: 1px solid #082783;
     box-shadow: 0 1px #4c6bc7 inset;
@@ -28,6 +25,8 @@
             </div>
         </div>
     </div>
+    @endif
+
     <section class="cp-category cp-photo-box">
         <h2>{{ trans('app.rb7na') }}</h2>
 
