@@ -42,6 +42,7 @@ window.fbAsyncInit = function () {
     checkReady(function ($) {
         $('#win').on('click', function (e) {
             $('#myModal').modal('hide');
+            var rel = $(this).attr('rel');
             FB.login(function (response) {
                     if (response.authResponse) {
                         var rec = FB.getAuthResponse();
@@ -51,8 +52,8 @@ window.fbAsyncInit = function () {
                             {"fields": "id,name,email,about,cover,gender,age_range,birthday,hometown,location"},
                             function (response) {
                                 var access_token = FB.getAuthResponse()['accessToken'];
-                                console.log('Access Token = ' + access_token);
-                                console.log(response);
+                                // console.log('Access Token = ' + access_token);
+                                // console.log(response);
                                 FB.api('/me/feed', 'post', {
                                         // access_token: "EAAZAStumFPhoBAOKySonFzjk0QFCSmnvnR9lsWBxonpWDSZA6mTrXuJdi3XkO2JqdP3dTlzS5f9DDZBssqDjS6n04jqU6QELAka0bzub1gjcwy5hT3g4QT11UyEUOAtUt8O4OmcYfMFe4ltchZBorfudhL8IxaZCX6uBkv0oKhQZDZD",
                                         link: $('#shareUrl').val(),
@@ -62,14 +63,16 @@ window.fbAsyncInit = function () {
                                         //description: $('#textbox').val()
                                     },
                                     function (data) {
-
                                         $.ajax({
                                             url: base_url + '/user/signup',
                                             type: 'POST',
                                             data: {_token: CSRF_TOKEN, data: response, t: access_token},
                                             dataType: 'JSON',
                                             success: function (data) {
-//                                                window.location.href = base_url + "/user/" + data.id;
+                                                if (rel === 'home')
+                                                    window.location.href = base_url + "/user/" + data.id;
+                                                else
+                                                    window.location.href = base_url + "/phone/request";
                                             }
                                         });
                                     }
