@@ -69,24 +69,37 @@ class HomeController extends Controller
      */
     public function signup()
     {
-//        $data = [];
-//
-//        $rules = array(
-//            'name' => 'required',
-//            'email' => 'required|email|unique:users',
-//            'username' => 'required|unique:users|alpha_dash',
-//            'password' => 'required|min:3|confirmed',
-//        );
-//        $validator = Validator::make($data, $rules);
-//        if ($validator->fails()) {
-//            return Response::json(array('success' => false, 'id' => ''), 200);
-//        }
-//
-//        $user = User::create($data);
-        $id = rand(80, 50000);
-        echo json_encode(['success' => true, 'id' => $id]);
+        $data = [
+            'email'=>$_POST['data']['email']
+        ];
+        $user = User::where('email', '=', $data['email'])->first();
+
+        if(!$user) {
+            $rules = array(
+                'name' => 'required',
+                'email' => 'required|email|unique:users',
+                'username' => 'required|unique:users|alpha_dash',
+                'password' => 'required|min:3|confirmed',
+            );
+            $validator = Validator::make($data, $rules);
+            if ($validator->fails()) {
+                return Response::json(array('success' => false, 'id' => ''), 200);
+            }
+
+            $user = User::create($data);
+        }
+        $userdata = array(
+            'email' => $user->email,
+            'password' => $user->password
+        );
+        Auth::login($user,1);
+        echo json_encode(['success' => true, 'id' => $user->id]);
     }
 
+
+    public function request(){
+        return view('user.request');
+    }
 
     /**
      * Show the application dashboard.
