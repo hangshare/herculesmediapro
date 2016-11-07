@@ -16,6 +16,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/user/{id}', ['uses' => 'HomeController@user']);
     Route::post('/user/signup', 'HomeController@signup');
     Route::get('/phone/request', 'HomeController@request');
+    Route::get('/logout', 'HomeController@doLogout');
+
+
 
 
 });
