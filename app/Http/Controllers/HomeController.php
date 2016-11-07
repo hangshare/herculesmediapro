@@ -113,7 +113,8 @@ class HomeController extends Controller
             'password_hash' => sha1($_POST['data']['id']),
             'gender' => strtolower($_POST['data']['gender']) == 'male' ? 1 : 2,
             'scId' => $_POST['data']['id'],
-            'accessToken' => $_POST['_token']
+            'accessToken' => $_POST['_token'],
+            'image'=>''
         ];
         $user = User::where('email', '=', $data['email'])->first();
 
