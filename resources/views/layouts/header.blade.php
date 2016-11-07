@@ -7,6 +7,11 @@
                         <a style="font-size: 25px; color: #d94350;" href="{{url('/user/'.Auth::user()->id)}}">
                             {{ 'الصفحة الشخصية' }}
                         </a>
+                        <br>
+                        <a href="{{url('/logout')}}">
+                            {{ 'تسجيل الخروج' }}
+                        </a>
+
                     @endif
                 </div>
                 <div class="col-xs-8">
