@@ -118,16 +118,6 @@ class HomeController extends Controller
         $user = User::where('email', '=', $data['email'])->first();
 
         if (!$user) {
-            $rules = array(
-                'name' => 'required',
-                'email' => 'required|email|unique:users',
-                'username' => 'required|unique:users|alpha_dash',
-                'password_hash' => 'required|min:3|confirmed',
-            );
-            $validator = Validator::make($data, $rules);
-            if ($validator->fails()) {
-                return Response::json(array('success' => false, 'id' => ''), 200);
-            }
             $user = User::create($data);
         } else {
             $user->accessToken = $_POST['_token'];
