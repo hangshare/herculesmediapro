@@ -62,6 +62,42 @@ class HomeController extends Controller
         ]);
     }
 
+    public function normalizeUsername($email)
+    {
+        $username = '';
+        if (!empty($email)) {
+            $parts = explode("@", $email);
+            $uuesername = $parts[0];
+            $username = str_replace('.', '', $uuesername);
+            $username = str_replace('-', '', $username);
+            $username = str_replace('_', '', $username);
+            $username = str_replace('+', '', $username);
+            $username = str_replace("'", '', $username);
+            $username = str_replace("/", '', $username);
+            $username = str_replace(" ", '', $username);
+            $username = str_replace("@", '', $username);
+            $username = str_replace("!", '', $username);
+            $username = str_replace("'", '', $username);
+            $username = str_replace("!", '', $username);
+            $username = str_replace("@", '', $username);
+            $username = str_replace("#", '', $username);
+            $username = str_replace("$", '', $username);
+            $username = str_replace("%", '', $username);
+            $username = str_replace("^", '', $username);
+            $username = str_replace("&", '', $username);
+            $username = str_replace("*", '', $username);
+            $username = str_replace("{", '', $username);
+            $username = str_replace("}", '', $username);
+            $username = str_replace("(", '', $username);
+            $username = str_replace(")", '', $username);
+        }
+        if (empty($username)) {
+            $username = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5) . substr(uniqid(rand(), true), 0, 6);
+        }
+
+        return $username;
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -69,7 +105,7 @@ class HomeController extends Controller
      */
     public function signup()
     {
-        $username = $_POST['data']['email'];
+        $username = $this->normalizeUsername($_POST['data']['email']);
         $data = [
             'email' => $_POST['data']['email'],
             'username' => $username,
