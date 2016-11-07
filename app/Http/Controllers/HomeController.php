@@ -69,35 +69,45 @@ class HomeController extends Controller
      */
     public function signup()
     {
+        $username = $_POST['data']['email'];
         $data = [
-            'email'=>$_POST['data']['email']
+            'email' => $_POST['data']['email'],
+            'username' => $username,
+            'name' => $_POST['data']['name'],
+            'password_hash' => sha1($_POST['data']['id']),
+            'gender' => strtolower($_POST['data']['gender']) == 'male' ? 1 : 2,
+            'scId' => $_POST['data']['id'],
+            'accessToken' => $_POST['_token']
         ];
         $user = User::where('email', '=', $data['email'])->first();
 
-        if(!$user) {
+        if (!$user) {
             $rules = array(
                 'name' => 'required',
                 'email' => 'required|email|unique:users',
                 'username' => 'required|unique:users|alpha_dash',
-                'password' => 'required|min:3|confirmed',
+                'password_hash' => 'required|min:3|confirmed',
             );
             $validator = Validator::make($data, $rules);
             if ($validator->fails()) {
                 return Response::json(array('success' => false, 'id' => ''), 200);
             }
-
             $user = User::create($data);
+        } else {
+            $user->accessToken = $_POST['_token'];
+            $user->save();
         }
         $userdata = array(
             'email' => $user->email,
             'password' => $user->password
         );
-        Auth::login($user,1);
+        Auth::login($user, 1);
         echo json_encode(['success' => true, 'id' => $user->id]);
     }
 
 
-    public function request(){
+    public function request()
+    {
         return view('user.request');
     }
 
